@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="row" id="listaSuperMercado">
+                    <!---
+                    <div class="col-md-4">
+                        
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    ----->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        //LLamado de repositorio con XMLHTTPREQUEST
+        const requestURL = "https://ddwduocvina.github.io/repo-supermarket/products.json" ;
+
+        const request = new XMLHttpRequest() ;
+
+        /* Generacion de la solicitud GET y acceso a la variable con open()*/
+        request.open("GET",requestURL) ;
+
+        //Reconocimiento del archivo respuesta
+        request.responseType = "json" ;
+
+        //Envio de la solicitud
+        request.send() ;
+
+        //Procesamiento de la respuesta con una funcion
+        request.onload = function() {
+            //Creacion de la variable de la respuesta
+            const variableListado = request.response ;
+
+            //Con un llamado de vuelta-callback llamamos a la funcion que procesara la respuesta
+            funcionListado(variableListado);
+        };
+
+        //Aqui creamos la funcion que mostrara los valores del JSON
+        function funcionListado(jsonOBJ) {
+            //Revision que se estan leyendo bien los datos en la consola
+            console.log(jsonOBJ);
+
+            const listado = document.getElementById('listaSuperMercado');
+
+            listado.innerHTML = '';
+
+            let html = '';
+
+            jsonOBJ.forEach(item => {
+        html += `
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="${item.filename}" class="card-img-top" alt="${item.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+
+
+
+
+
+
+
+
+
+            /*
+            jsonOBJ.forEach((item , index)  => {
+                html = '<div class="col-md-4">';
+                    html += '<div class="card">';
+                        html += '<img src="${item.filename}" class="card-img-top" alt="${item.title}">';
+                        html += '<div class="card-body">' ;
+                            html += '<h5 class="card-title">${item.title}</h5>';
+                        html += '</div>' ;
+                    html += '</div>' ;
+
+                html += '</div>' ;
+
+                listado.innerHTML = html ;
+            }); */
+
+        };
+
+    </script>
+    
+</body>
+</html>
